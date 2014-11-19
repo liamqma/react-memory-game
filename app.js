@@ -1,40 +1,15 @@
-var express = require('express');
-var path = require('path');
+var finalhandler = require('finalhandler')
+var http = require('http')
+var serveStatic = require('serve-static')
 
-var app = express();
+// Serve up public/ftp folder
+var serve = serveStatic('public', {'index': ['index.html']})
 
-app.use(express.static(path.join(__dirname, 'public')));
+// Create server
+var server = http.createServer(function(req, res){
+    var done = finalhandler(req, res)
+    serve(req, res, done)
+})
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
-
-// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
-
-
-module.exports = app;
+// Listen
+server.listen(3000)
