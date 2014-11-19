@@ -73,9 +73,6 @@ var Board = React.createClass({
   render() {
     return (
       <div>
-        <button onClick={this.props.onGameFinished}>
-          End game
-        </button>
         <Status
           found={this.state.found}
           max={this.props.max}
