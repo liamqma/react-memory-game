@@ -18,7 +18,7 @@ var Status = React.createClass({
           foundall: 'You\'ve found all ' + max + ' pairs! Well done!'
         };
     return (
-      <p>
+      <p className="status">
         ({found}/{max})&nbsp;&nbsp;
         {texts[
           this.props.message === 'choosetile' && found === max ?

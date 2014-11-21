@@ -1,139 +1,69 @@
-@-webkit-keyframes wronganim {
-    to {
-        background-color: red;
-    }
-}
-
-@-moz-keyframes wronganim {
-    to {
-        background-color: red;
-    }
-}
-
-@keyframes wronganim {
-    to {
-        background-color: red;
-    }
-}
-
-@-webkit-keyframes correctanim {
-    to {
-        background-color: green;
-        color: white;
-    }
-}
-
-@-moz-keyframes correctanim {
-    to {
-        background-color: green;
-        color: white;
-    }
-}
-
-@keyframes correctanim {
-    to {
-        background-color: green;
-        color: white;
-    }
-}
-
 body {
     background: url(images/background.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background-size: cover;
 }
 
-.brick > div {
-    height: 50px;
-    width: 50px;
-    border: 1px solid black;
+/* Game */
+#game {
+    margin: 0 auto;
+    width: 660px;
+}
+
+/* Status */
+.status {
     text-align: center;
-    line-height: 50px;
-    -webkit-backface-visibility: hidden;
-    -webkit-transition: -webkit-transform 0.3s linear;
-    -moz-transition: -moz-transform 0.3s linear;
-    transition: transform 0.3s linear;
-    -webkit-transform-style: preserve-3d;
+    font-size: 35px;
+    font-weight: bold;
+    color: whitesmoke;
+}
+
+/* Tile */
+/* entire container, keeps perspective */
+.flip-container {
+    float:left;
+    margin-right:15px;
+    margin-bottom: 15px;
+    font-size: 150px;
+}
+/* flip the pane when hovered */
+.flipper.flipped{
+    transform: rotateY(180deg);
+}
+
+.flip-container, .front, .back {
+    width: 150px;
+    height: 150px;
+}
+
+/* flip speed goes here */
+.flipper {
+    transition: 0.6s;
     transform-style: preserve-3d;
-    position: absolute;
-    overflow: hidden;
-    border-radius: 5px;
+    position: relative;
 }
 
-.brick > .front {
+/* hide back of pane during swap */
+.front, .back {
+    box-shadow: 1px 1px 2px black;
+    line-height: 150px;
+    border-radius: 10px;
+    text-align: center;
+    backface-visibility: hidden;
     background-color: white;
-    border-radius: 2px;
-    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24);
-    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24);
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
-.brick, .brick div {
-    user-select: none;
-    cursor: pointer;
-}
-
-.brick {
-    float: left;
-    margin-right: 10px;
-    width: 50px;
-    height: 50px;
-}
-
-.brick > .back {
-    -webkit-animation-duration: 0.5s;
-    -webkit-animation-timing-function: ease;
-    -webkit-animation-delay: 0.3s;
-    -webkit-animation-iteration-count: 1;
-    -webkit-animation-fill-mode: forwards;
-    -moz-animation-duration: 0.5s;
-    -moz-animation-timing-function: ease;
-    -moz-animation-delay: 0.3s;
-    -moz-animation-iteration-count: 1;
-    -moz-animation-fill-mode: forwards;
-    animation-duration: 0.5s;
-    animation-timing-function: ease;
-    animation-delay: 0.3s;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
-}
-
-.brick.flipped.wrong > .back {
-    -webkit-animation-name: wronganim;
-    -moz-animation-name: wronganim;
-    animation-name: wronganim;
-}
-
-.brick.flipped.correct > .back {
-    -webkit-animation-name: correctanim;
-    -moz-animation-name: correctanim;
-    animation-name: correctanim;
-}
-
-.brick > .back {
-    -webkit-transform: perspective(50px) rotateY(180deg) translate3d(0px, 0px, 2px);
-    -moz-transform: perspective(50px) rotateY(180deg) translate3d(0px, 0px, 2px);
-    transform: perspective(50px) rotateY(180deg) translate3d(0px, 0px, 2px);
-}
-
-.brick.flipped > .front {
-    -webkit-transform: perspective(50px) rotateY(-180deg) translate3d(0px, 0px, 2px);
-    -moz-transform: perspective(50px) rotateY(-180deg) translate3d(0px, 0px, 2px);
-    transform: perspective(50px) rotateY(-180deg) translate3d(0px, 0px, 2px);
-}
-
-.brick.flipped > .back {
-    -webkit-transform: perspective(50px) rotateY(0deg) translate3d(0px, 0px, 1px);
-    -moz-transform: perspective(50px) rotateY(0deg) translate3d(0px, 0px, 1px);
-    transform: perspective(50px) rotateY(0deg) translate3d(0px, 0px, 1px);
-}
-
+/* front pane, placed above back */
 .front {
-    font-size: 2em;
+    z-index: 2;
+    /* for firefox 31 */
+    transform: rotateY(0deg);
 }
 
-.error {
-    color: red;
+/* back, initially hidden pane */
+.back {
+    background-size: cover;
+    transform: rotateY(180deg);
 }

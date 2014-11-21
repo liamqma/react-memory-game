@@ -2,7 +2,7 @@
 
 var Board = React.createClass({
   propTypes: {
-    words: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+    images: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
     max: React.PropTypes.number.isRequired
   },
 
@@ -13,7 +13,7 @@ var Board = React.createClass({
       found: 0,
       isWaiting: false,
       message: 'choosetile',
-      wrongIndexes: [],
+      wrongIndexes: []
     };
   },
 
@@ -24,7 +24,7 @@ var Board = React.createClass({
 
     var correctIndexes = this.state.correctIndexes;
     var firstFlipIndex = this.state.firstFlipIndex;
-    var words = this.props.words;
+    var images = this.props.images;
 
     // turn up lone tile
     if (firstFlipIndex === null){
@@ -36,7 +36,7 @@ var Board = React.createClass({
     }
 
     // clicked second
-    if (words[index] === words[firstFlipIndex]) {
+    if (images[index] === images[firstFlipIndex]) {
       this.setState({
         correctIndexes: correctIndexes.concat([index, firstFlipIndex]),
         firstFlipIndex: null,
@@ -49,7 +49,7 @@ var Board = React.createClass({
         firstFlipIndex: null,
         isWaiting: true,
         message: 'wrong',
-        wrongIndexes: [index, firstFlipIndex],
+        wrongIndexes: [index, firstFlipIndex]
       });
     }
 
@@ -62,7 +62,7 @@ var Board = React.createClass({
         this.setState({
           isWaiting: false,
           message: 'choosetile',
-          wrongIndexes: [],
+          wrongIndexes: []
         });
       },
       2000
@@ -71,19 +71,19 @@ var Board = React.createClass({
 
   render() {
     return (
-      <div>
+      <div id="game">
         <Status
           found={this.state.found}
           max={this.props.max}
           message={this.state.message}
         />
-        {this.props.words.map((word, index) => {
+        {this.props.images.map((image, index) => {
           var isFirstFlip = index === this.state.firstFlipIndex;
           var isCorrect = _.contains(this.state.correctIndexes, index);
           var isWrong = _.contains(this.state.wrongIndexes, index);
           return (
             <Tile
-              word={word}
+              image={image}
               key={index}
               index={index}
               isFlipped={isFirstFlip || isCorrect || isWrong}
