@@ -2,9 +2,8 @@
 
 var Board = React.createClass({
   propTypes: {
-    max: React.PropTypes.number.isRequired,
-    onGameFinished: React.PropTypes.func.isRequired,
     words: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+    max: React.PropTypes.number.isRequired
   },
 
   getInitialState() {

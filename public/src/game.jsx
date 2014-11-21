@@ -7,7 +7,6 @@ var Game = React.createClass({
     render() {
         return (
             <Board
-                onGameFinished={this.reset}
                 words={this.state.words}
                 max={this.state.words.length / 2}
             />
