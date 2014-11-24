@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node server.js",
-    "postinstall": "node node_modules/.bin/gulp default"
+    "postinstall": "./node_modules/.bin/gulp default"
   },
   "dependencies": {
     "async": "^0.9.0",

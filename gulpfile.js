@@ -4,12 +4,13 @@ var gutil = require('gulp-util');
 var del = require('del');
 var react = require('gulp-react');
 
-
+// Delete files within build directory
 gulp.task('clean', function (callback) {
 
     del(['./build/*'], callback);
 });
 
+// Copy necessary files to build directory
 gulp.task('copy', function () {
 
     gulp.src(['./package.json', 'server.js', 'Procfile', 'public/lib/*', 'public/images/*', 'public/index.html', 'public/styles.css'], {base: './'})
@@ -17,6 +18,7 @@ gulp.task('copy', function () {
 
 });
 
+// Transform coffee script to javascript, and copy to build directory
 gulp.task('coffee', function () {
 
     return gulp.src('./server.coffee')
@@ -25,6 +27,7 @@ gulp.task('coffee', function () {
 
 });
 
+// Transform .jsx to .js, and copy to build directory
 gulp.task('react', function () {
 
     return gulp.src('./**/*.jsx')
