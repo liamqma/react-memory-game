@@ -3,17 +3,18 @@ var coffee = require('gulp-coffee');
 var gutil = require('gulp-util');
 var del = require('del');
 var react = require('gulp-react');
+var runSequence = require('run-sequence');
 
 // Delete files within build directory
-gulp.task('clean', function (callback) {
+gulp.task('clean', function () {
 
-    del(['./build/*'], callback);
+    return del(['./build/*']);
 });
 
 // Copy necessary files to build directory
 gulp.task('copy', function () {
 
-    gulp.src(['./package.json', 'server.js', 'Procfile', 'public/lib/*', 'public/images/*', 'public/index.html', 'public/styles.css'], {base: './'})
+    return gulp.src(['./package.json', 'Procfile', 'public/lib/*', 'public/images/*', 'public/index.html', 'public/styles.css'], {base: './'})
         .pipe(gulp.dest('build'));
 
 });
@@ -36,7 +37,11 @@ gulp.task('react', function () {
 
 });
 
-gulp.task('default', ['clean'], function() {
-    gulp.start(['copy', 'coffee', 'react']);
+
+// Default
+gulp.task('default', function(callback) {
+
+    runSequence('clean', ['copy', 'coffee', 'react'], callback);
+
 });
 
