@@ -11,7 +11,7 @@ Get started
     git clone [Package]
     cd [Directory]
     npm install
-    node app.js
+    node server.js
 
 ```
 

@@ -3,10 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node server.js",
+    "postinstall": "node node_modules/.bin/gulp default"
   },
   "dependencies": {
     "finalhandler": "^0.3.2",
-    "serve-static": "^1.7.1"
+    "serve-static": "^1.7.1",
+    "gulp": "^3.8.10"
   }
 }
