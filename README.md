@@ -11,7 +11,8 @@ Get started
     git clone [Package]
     cd [Directory]
     npm install
-    node server.js
+    ./node_modules/.bin/gulp
+    node ./build/server.js
 
 ```
 
