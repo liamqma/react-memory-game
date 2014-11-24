@@ -12,5 +12,6 @@
     "gulp-coffee": "^2.2.0",
     "gulp-util": "^3.0.1",
     "serve-static": "^1.7.1"
-  }
+  },
+  "engine": "node 0.10.33"
 }
