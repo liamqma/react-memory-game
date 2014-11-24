@@ -12,7 +12,7 @@ gulp.task('clean', function (callback) {
 
 gulp.task('copy', function () {
 
-    gulp.src(['./package.json', 'server.js', 'Procfile', 'public/*', 'public/**/*'], {base: './'})
+    gulp.src(['./package.json', 'server.js', 'Procfile', 'public/lib/*', 'public/images/*', 'public/index.html', 'public/styles.css'], {base: './'})
         .pipe(gulp.dest('build'));
 
 });
@@ -36,3 +36,4 @@ gulp.task('react', function () {
 gulp.task('default', ['clean'], function() {
     gulp.start(['copy', 'coffee', 'react']);
 });
+

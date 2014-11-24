@@ -3,7 +3,7 @@ http = require("http")
 serveStatic = require("serve-static")
 
 # Serve up public/ftp folder
-serve = serveStatic("public",
+serve = serveStatic("build/public",
     index: ["index.html"]
 )
 
