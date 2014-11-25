@@ -12,7 +12,6 @@ Get started
     cd [Directory]
     npm install
     ./node_modules/.bin/gulp
-    node ./build/server.js
 
 ```
 

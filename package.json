@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node server.js",
-    "postinstall": "./node_modules/.bin/gulp default"
+    "postinstall": "./node_modules/.bin/gulp build"
   },
   "dependencies": {
     "async": "^0.9.0",
@@ -15,7 +15,8 @@
     "gulp-react": "^2.0.0",
     "gulp-util": "^3.0.1",
     "run-sequence": "^1.0.2",
-    "serve-static": "^1.7.1"
+    "serve-static": "^1.7.1",
+    "gulp-develop-server": "^0.2.5"
   },
   "engine": "node 0.10.33"
 }

@@ -4,6 +4,11 @@ var gutil = require('gulp-util');
 var del = require('del');
 var react = require('gulp-react');
 var runSequence = require('run-sequence');
+var server = require('gulp-develop-server');
+
+var paths = {
+    scripts: ['public/src/*.jsx']
+};
 
 // Delete files within build directory
 gulp.task('clean', function () {
@@ -37,11 +42,27 @@ gulp.task('react', function () {
 
 });
 
+// Watch
+gulp.task('watch', function(){
 
-// Default
-gulp.task('default', function(callback) {
-
-    runSequence('clean', ['copy', 'coffee', 'react'], callback);
+    gulp.watch(paths.scripts, ['react'])
 
 });
 
+
+// Build
+gulp.task('build', function (callback) {
+
+    return runSequence('clean', 'copy', ['coffee', 'react'], callback);
+
+});
+
+// Run server
+gulp.task('server:start', function () {
+    return server.listen({path: './build/server.js'});
+});
+
+// Finally default:
+gulp.task('default', function (callback) {
+    runSequence('build', 'server:start', 'watch', callback);
+});
