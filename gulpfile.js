@@ -5,9 +5,11 @@ var del = require('del');
 var react = require('gulp-react');
 var runSequence = require('run-sequence');
 var server = require('gulp-develop-server');
+var stylus = require('gulp-stylus');
 
 var paths = {
-    scripts: ['public/src/*.jsx']
+    scripts: ['public/src/*.jsx'],
+    styles: ['public/styles.styl']
 };
 
 // Delete files within build directory
@@ -19,7 +21,7 @@ gulp.task('clean', function () {
 // Copy necessary files to build directory
 gulp.task('copy', function () {
 
-    return gulp.src(['./package.json', 'Procfile', 'public/lib/*', 'public/images/*', 'public/index.html', 'public/styles.css'], {base: './'})
+    return gulp.src(['./package.json', 'Procfile', 'public/lib/*', 'public/images/*', 'public/index.html'], {base: './'})
         .pipe(gulp.dest('build'));
 
 });
@@ -36,16 +38,24 @@ gulp.task('coffee', function () {
 // Transform .jsx to .js, and copy to build directory
 gulp.task('react', function () {
 
-    return gulp.src('./**/*.jsx')
+    return gulp.src('*/*/*.jsx')
         .pipe(react({harmony: true}))
-        .pipe(gulp.dest('./build/'));
+        .pipe(gulp.dest('./build'));
+
+});
+
+// Transform .styl to .css, and copy to build directory
+gulp.task('stylus', function () {
+
+    return gulp.src('*/*.styl').pipe(stylus()).pipe(gulp.dest('./build'));
 
 });
 
 // Watch
-gulp.task('watch', function(){
+gulp.task('watch', function () {
 
-    gulp.watch(paths.scripts, ['react'])
+    gulp.watch(paths.scripts, ['react']);
+    gulp.watch(paths.styles, ['stylus']);
 
 });
 
@@ -53,7 +63,7 @@ gulp.task('watch', function(){
 // Build
 gulp.task('build', function (callback) {
 
-    return runSequence('clean', 'copy', ['coffee', 'react'], callback);
+    return runSequence('clean', 'copy', ['coffee', 'react', 'stylus'], callback);
 
 });
 
