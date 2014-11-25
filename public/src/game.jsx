@@ -7,23 +7,28 @@ var Game = React.createClass({
     },
     componentDidMount: function() {
 
-        setTimeout(function(){
+        var self = this;
+        var images = [];
 
-            // Here ajax get random images from flickr
-            var images = [
-                '/images/1.jpg',
-                '/images/2.jpg',
-                '/images/3.jpg',
-                '/images/4.jpg',
-                '/images/5.jpg',
-                '/images/6.jpg'
-            ];
+        $.ajax({
+            url: 'http://www.flickr.com/services/rest/?method=flickr.photos.getRecent&format=json&per_page=6&api_key=ac2595fc19d820ccda1c1efc636be360',
+            dataType: 'jsonp',
+            type: 'GET',
+            jsonpCallback: 'jsonFlickrApi',
+            success: function(data){
 
-            this.setState({
-                images: _.shuffle(images.concat(images))
-            });
+                data.photos.photo.forEach(function(photo){
 
-        }.bind(this), 1);
+                    images.push("http://farm" + photo.farm + ".static.flickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + ".jpg");
+
+                });
+
+                self.setState({
+                    images: _.shuffle(images.concat(images))
+                });
+
+            }
+        });
 
     },
     render() {

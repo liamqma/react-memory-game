@@ -22,7 +22,7 @@ gulp.task('clean', function () {
 // Copy necessary files to build directory
 gulp.task('copy', function () {
 
-    return gulp.src(['./package.json', 'Procfile', 'public/lib/*', 'public/images/*', 'public/index.html'], {base: './'})
+    return gulp.src(['./package.json', 'Procfile', 'public/lib/*', 'public/index.html'], {base: './'})
         .pipe(gulp.dest('build'));
 
 });
