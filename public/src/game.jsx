@@ -29,7 +29,7 @@ var Game = React.createClass({
                         images: _.shuffle(images.concat(images))
                     });
 
-                }, 10000)
+                }, 1000)
 
             }
         });
