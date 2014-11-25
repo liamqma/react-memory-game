@@ -6,6 +6,7 @@ var react = require('gulp-react');
 var runSequence = require('run-sequence');
 var server = require('gulp-develop-server');
 var stylus = require('gulp-stylus');
+var plumber = require('gulp-plumber');
 
 var paths = {
     scripts: ['public/src/*.jsx'],
@@ -39,6 +40,7 @@ gulp.task('coffee', function () {
 gulp.task('react', function () {
 
     return gulp.src('*/*/*.jsx')
+        .pipe(plumber())
         .pipe(react({harmony: true}))
         .pipe(gulp.dest('./build'));
 
@@ -47,7 +49,7 @@ gulp.task('react', function () {
 // Transform .styl to .css, and copy to build directory
 gulp.task('stylus', function () {
 
-    return gulp.src('*/*.styl').pipe(stylus()).pipe(gulp.dest('./build'));
+    return gulp.src('*/*.styl').pipe(plumber()).pipe(stylus()).pipe(gulp.dest('./build'));
 
 });
 
