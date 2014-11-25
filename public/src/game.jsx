@@ -3,7 +3,7 @@
 var Game = React.createClass({
     getInitialState() {
 
-        return {playing: true, images: []};
+        return {images: []};
     },
     componentDidMount: function() {
 
@@ -17,15 +17,19 @@ var Game = React.createClass({
             jsonpCallback: 'jsonFlickrApi',
             success: function(data){
 
-                data.photos.photo.forEach(function(photo){
+                setTimeout(function(){
 
-                    images.push("http://farm" + photo.farm + ".static.flickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + ".jpg");
+                    data.photos.photo.forEach(function(photo){
 
-                });
+                        images.push("http://farm" + photo.farm + ".static.flickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + ".jpg");
 
-                self.setState({
-                    images: _.shuffle(images.concat(images))
-                });
+                    });
+
+                    self.setState({
+                        images: _.shuffle(images.concat(images))
+                    });
+
+                }, 10000)
 
             }
         });
@@ -33,10 +37,13 @@ var Game = React.createClass({
     },
     render() {
         return (
+            this.state.images.length?
             <Board
                 images={this.state.images}
                 max={this.state.images.length / 2}
             />
+            :
+            <Loading />
         );
     }
 });
