@@ -1,0 +1,17 @@
+{
+  "name": "react-memory-game",
+  "homepage": "https://github.com/liamqma/react-memory-game",
+  "authors": [
+    "Liam Ma <liam.q.ma@gmail.com>"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1"
+  }
+}

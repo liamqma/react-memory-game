@@ -7,6 +7,7 @@ var runSequence = require('run-sequence');
 var server = require('gulp-develop-server');
 var stylus = require('gulp-stylus');
 var plumber = require('gulp-plumber');
+var bower = require('gulp-bower');
 
 var paths = {
     scripts: ['public/src/*.jsx'],
@@ -53,6 +54,13 @@ gulp.task('stylus', function () {
 
 });
 
+/**
+ * Bower install dependencies
+ */
+gulp.task('bower', function() {
+    return bower()
+});
+
 // Watch
 gulp.task('watch', function () {
 
@@ -65,7 +73,7 @@ gulp.task('watch', function () {
 // Build
 gulp.task('build', function (callback) {
 
-    return runSequence('clean', 'copy', ['coffee', 'react', 'stylus'], callback);
+    return runSequence('clean', 'copy', 'bower', ['coffee', 'react', 'stylus'], callback);
 
 });
 
