@@ -4,12 +4,13 @@ var gutil = require('gulp-util');
 var del = require('del');
 var react = require('gulp-react');
 var runSequence = require('run-sequence');
-var server = require('gulp-develop-server');
+var nodemon = require('gulp-nodemon');
 var stylus = require('gulp-stylus');
 var plumber = require('gulp-plumber');
 var bower = require('gulp-bower');
 
 var paths = {
+    coffee: ['src/*.coffee'],
     scripts: ['public/src/*.jsx'],
     styles: ['public/styles.styl']
 };
@@ -23,7 +24,7 @@ gulp.task('clean', function () {
 // Copy necessary files to build directory
 gulp.task('copy', function () {
 
-    return gulp.src(['./package.json', 'Procfile', 'public/images/*', 'public/index.html'], {base: './'})
+    return gulp.src(['package.json', 'Procfile', 'public/images/*', 'public/index.html'], {base: './'})
         .pipe(gulp.dest('build'));
 
 });
@@ -31,7 +32,7 @@ gulp.task('copy', function () {
 // Transform coffee script to javascript, and copy to build directory
 gulp.task('coffee', function () {
 
-    return gulp.src('./server.coffee')
+    return gulp.src(['server.coffee', 'src/*.coffee'], {base: './'})
         .pipe(coffee({bare: true}).on('error', gutil.log))
         .pipe(gulp.dest('./build/'))
 
@@ -57,8 +58,8 @@ gulp.task('stylus', function () {
 /**
  * Bower install dependencies
  */
-gulp.task('bower', function() {
-    return bower()
+gulp.task('bower', function () {
+    return bower();
 });
 
 // Watch
@@ -66,6 +67,7 @@ gulp.task('watch', function () {
 
     gulp.watch(paths.scripts, ['react']);
     gulp.watch(paths.styles, ['stylus']);
+    gulp.watch(paths.coffee, ['coffee']);
 
 });
 
@@ -79,7 +81,7 @@ gulp.task('build', function (callback) {
 
 // Run server
 gulp.task('server:start', function () {
-    return server.listen({path: './build/server.js'});
+    return nodemon({ script: 'build/server.js'})
 });
 
 // Finally default:
