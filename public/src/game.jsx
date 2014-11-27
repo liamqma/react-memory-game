@@ -5,7 +5,18 @@ var Game = React.createClass({
 
         return {images: []};
     },
-    componentDidMount: function() {
+    componentDidMount() {
+
+        this.getImages();
+
+    },
+    retry() {
+
+        this.setState({images: []});
+        this.getImages();
+
+    },
+    getImages() {
 
         var self = this;
         var images = [];
@@ -46,6 +57,7 @@ var Game = React.createClass({
             <Board
                 images={this.state.images}
                 max={this.state.images.length / 2}
+                retry={this.retry}
             />
             :
             <Loading />

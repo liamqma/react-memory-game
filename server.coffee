@@ -1,19 +1,17 @@
-finalhandler = require("finalhandler")
-http = require("http")
-serveStatic = require("serve-static")
+express = require 'express'
+app = express()
 
-# Serve up public/ftp folder
-serve = serveStatic("build/public",
-    index: ["index.html"]
-)
+# Server static files
+app.use(express.static(__dirname + '/public'));
 
-# Create server
-server = http.createServer((req, res) ->
-    done = finalhandler(req, res)
-    serve req, res, done
-    return
-)
+# PORT
+port = process.env.PORT or 3000
 
 # Listen
-port = process.env.PORT or 3000
-server.listen port
+server = app.listen port, ->
+
+  host = server.address().address
+  port = server.address().port
+
+  console.log('Example app listening at http://%s:%s', host, port)
+
