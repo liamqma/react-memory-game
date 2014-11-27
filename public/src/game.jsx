@@ -42,35 +42,6 @@ var Game = React.createClass({
             }
         })
 
-        //$.ajax({
-        //    url: 'https://www.flickr.com/services/rest/?method=flickr.photos.getRecent&format=json&per_page=6&api_key=ac2595fc19d820ccda1c1efc636be360',
-        //    dataType: 'jsonp',
-        //    type: 'GET',
-        //    jsonpCallback: 'jsonFlickrApi',
-        //    success: function(data){
-        //
-        //        setTimeout(function(){
-        //
-        //            data.photos.photo.forEach(function(photo){
-        //
-        //                images.push("https://farm" + photo.farm + ".static.flickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + ".jpg");
-        //
-        //            });
-        //
-        //            self.setState({
-        //                images: _.shuffle(images.concat(images))
-        //            });
-        //
-        //        }, 1000)
-        //
-        //    },
-        //    error: function( jqXHR, textStatus, errorThrown) {
-        //
-        //        console.log(errorThrown);
-        //
-        //    }
-        //});
-
     },
     render() {
         return (
