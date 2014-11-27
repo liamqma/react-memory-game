@@ -23,7 +23,7 @@ gulp.task('clean', function () {
 // Copy necessary files to build directory
 gulp.task('copy', function () {
 
-    return gulp.src(['./package.json', 'Procfile', 'public/lib/*', 'public/images/*', 'public/index.html'], {base: './'})
+    return gulp.src(['./package.json', 'Procfile', 'public/images/*', 'public/index.html'], {base: './'})
         .pipe(gulp.dest('build'));
 
 });
@@ -73,7 +73,7 @@ gulp.task('watch', function () {
 // Build
 gulp.task('build', function (callback) {
 
-    return runSequence('clean', 'copy', 'bower', ['coffee', 'react', 'stylus'], callback);
+    return runSequence('clean', 'bower', 'copy', ['coffee', 'react', 'stylus'], callback);
 
 });
 

@@ -31,6 +31,11 @@ var Game = React.createClass({
 
                 }, 1000)
 
+            },
+            error: function(data) {
+
+                console.log(data);
+
             }
         });
 
