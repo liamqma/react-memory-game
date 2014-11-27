@@ -21,7 +21,7 @@ var Game = React.createClass({
 
                     data.photos.photo.forEach(function(photo){
 
-                        images.push("http://farm" + photo.farm + ".static.flickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + ".jpg");
+                        images.push("https://farm" + photo.farm + ".static.flickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + ".jpg");
 
                     });
 

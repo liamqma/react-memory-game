@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 
-React.renderComponent(
+React.render(
     <Game />,
     document.querySelector('body')
 );
