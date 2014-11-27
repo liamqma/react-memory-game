@@ -13,7 +13,6 @@
     "gulp": "^3.8.10",
     "gulp-bower": "0.0.7",
     "gulp-coffee": "^2.2.0",
-    "gulp-develop-server": "^0.2.5",
     "gulp-nodemon": "^1.0.4",
     "gulp-plumber": "^0.6.6",
     "gulp-react": "^2.0.0",
