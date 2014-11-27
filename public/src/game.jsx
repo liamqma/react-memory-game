@@ -11,7 +11,7 @@ var Game = React.createClass({
         var images = [];
 
         $.ajax({
-            url: 'http://www.flickr.com/services/rest/?method=flickr.photos.getRecent&format=json&per_page=6&api_key=ac2595fc19d820ccda1c1efc636be360',
+            url: 'https://www.flickr.com/services/rest/?method=flickr.photos.getRecent&format=json&per_page=6&api_key=ac2595fc19d820ccda1c1efc636be360',
             dataType: 'jsonp',
             type: 'GET',
             jsonpCallback: 'jsonFlickrApi',
@@ -32,9 +32,9 @@ var Game = React.createClass({
                 }, 1000)
 
             },
-            error: function(data) {
+            error: function( jqXHR, textStatus, errorThrown) {
 
-                console.log(data);
+                console.log(errorThrown);
 
             }
         });
