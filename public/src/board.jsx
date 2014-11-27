@@ -3,8 +3,7 @@
 var Board = React.createClass({
     propTypes: {
         images: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
-        max: React.PropTypes.number.isRequired,
-        retry: React.PropTypes.func.isRequired
+        max: React.PropTypes.number.isRequired
     },
 
     getInitialState() {
@@ -73,16 +72,11 @@ var Board = React.createClass({
     render() {
         return (
             <div id="game">
-                <div className="header">
-                    <button className="btn btn-danger retry" onClick={this.props.retry}>
-                        <span className="glyphicon glyphicon-refresh"></span>
-                    </button>
-                    <Status
-                        found={this.state.found}
-                        max={this.props.max}
-                        message={this.state.message}
-                    />
-                </div>
+                <Status
+                    found={this.state.found}
+                    max={this.props.max}
+                    message={this.state.message}
+                />
         {this.props.images.map((image, index) => {
             var isFirstFlip = index === this.state.firstFlipIndex;
             var isCorrect = _.contains(this.state.correctIndexes, index);

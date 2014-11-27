@@ -54,11 +54,15 @@ var Game = React.createClass({
     render() {
         return (
             this.state.images.length?
-            <Board
-                images={this.state.images}
-                max={this.state.images.length / 2}
-                retry={this.retry}
-            />
+            <div>
+                <button className="btn btn-danger retry" onClick={this.retry}>
+                    <span className="glyphicon glyphicon-refresh"></span>
+                </button>
+                <Board
+                    images={this.state.images}
+                    max={this.state.images.length / 2}
+                />
+            </div>
             :
             <Loading />
         );
