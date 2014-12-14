@@ -21,26 +21,19 @@ var Game = React.createClass({
         var self = this;
         var images = [];
 
-        $.ajax({
-            url: '/api/images',
-            dataType: 'json',
-            type: 'get',
-            success: function(data) {
-                setTimeout(function(){
+        setTimeout(function(){
 
-                    data.forEach(function(photo){
+            var i;
 
-                        images.push("/flickr/" + photo);
-
-                    });
-
-                    self.setState({
-                        images: _.shuffle(images.concat(images))
-                    });
-
-                }, 1000)
+            for (i = 1; i < 10; i++) {
+                images.push("/flickr/" + i + ".jpg");
             }
-        })
+
+            self.setState({
+                images: _.shuffle(images.concat(images))
+            });
+
+        }, 1000);
 
     },
     render() {
