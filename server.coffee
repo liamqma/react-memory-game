@@ -2,7 +2,7 @@ express = require 'express'
 app = express()
 
 # Server static files
-app.use(express.static(__dirname + '/build/public'));
+app.use(express.static(__dirname + '/public'));
 
 # PORT
 port = process.env.PORT or 3000

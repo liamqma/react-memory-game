@@ -26,11 +26,15 @@ var Game = React.createClass({
             var i;
 
             for (i = 1; i < 10; i++) {
-                images.push("/flickr/" + i + ".jpg");
+                images.push("/images/flickr/" + i + ".jpg");
             }
 
+            images = _.shuffle(images);
+            images.shift();
+            images = images.concat(images);
+
             self.setState({
-                images: _.shuffle(images.concat(images))
+                images: images
             });
 
         }, 1000);

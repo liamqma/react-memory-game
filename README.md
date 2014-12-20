@@ -1,4 +1,4 @@
-DEMO: [https://react-memory-game.herokuapp.com/](https://react-memory-game.herokuapp.com/)
+DEMO: [http://react-memory.liamqma.me/](http://react-memory.liamqma.me)
 
 The code was original from [https://github.com/krawaller/reactexperiment/](https://github.com/krawaller/reactexperiment/)
 
@@ -11,6 +11,7 @@ Get started
     git clone [Package]
     cd [Directory]
     npm install
+    bower install
     ./node_modules/.bin/gulp
 
 ```
