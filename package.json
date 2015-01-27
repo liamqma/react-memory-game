@@ -1,24 +1,38 @@
 {
-  "name": "react-memory-game",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "start": "node server.js",
-    "postinstall": "./node_modules/.bin/gulp build"
-  },
+  "name": "react-flux-memory-game",
+  "author": "Liam Ma",
+  "version": "0.0.1",
+  "description": "A memory card built with React.js",
   "dependencies": {
-    "async": "^0.9.0",
-    "coffee-script": "^1.8.0",
-    "del": "^0.1.3",
-    "express": "^4.10.4",
-    "gulp": "^3.8.10",
-    "gulp-nodemon": "^1.0.4",
-    "gulp-plumber": "^0.6.6",
-    "gulp-react": "^2.0.0",
-    "gulp-stylus": "^1.3.4",
-    "gulp-util": "^3.0.1",
-    "run-sequence": "^1.0.2",
-    "underscore": "^1.7.0"
+    "envify": "^3.0.0",
+    "flux": "^2.0.1",
+    "jest-cli": "~0.1.17",
+    "keymirror": "^0.1.1",
+    "object-assign": "^2.0.0",
+    "react": "^0.12.2",
+    "reactify": "^0.15.2",
+    "stylus": "^0.49.3",
+    "uglify-js": "~2.4.15",
+    "watchify": "^2.1.1"
   },
-  "engine": "node 0.10.33"
+  "devDependencies": {
+    "browserify": "^6.2.0",
+    "envify": "^3.0.0",
+    "jest-cli": "~0.1.17",
+    "reactify": "^0.15.2",
+    "uglify-js": "~2.4.15",
+    "watchify": "^2.1.1"
+  },
+  "main": "js/app.jsx",
+  "scripts": {
+    "start": "watchify -o js/bundle.js -v -d .",
+    "build": "NODE_ENV=production browserify . | uglifyjs -cm > js/bundle.min.js",
+    "test": "jest"
+  },
+  "browserify": {
+    "transform": [
+      "reactify",
+      "envify"
+    ]
+  }
 }
