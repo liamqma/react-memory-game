@@ -8,14 +8,22 @@ var Tile = React.createClass({
     propTypes: {
         id: React.PropTypes.number.isRequired,
         image: React.PropTypes.string.isRequired,
-        flipped: React.PropTypes.bool.isRequired
+        flipped: React.PropTypes.bool.isRequired,
     },
-
-    onClick: function() {
-        TileActions.clickTile(this.props.id);
+    getInitialState: function () {
+        return {
+            flipped: false
+        }
     },
+    onClick: function () {
+        this.setState({flipped: true});
+        setTimeout(function () {
+            this.setState({flipped: false});
+            TileActions.clickTile(this.props.id);
+        }.bind(this), 1000);
 
-    render: function() {
+    },
+    render: function () {
 
         var backStyle = {
             backgroundImage: 'url(' + this.props.image + ')'
@@ -26,7 +34,7 @@ var Tile = React.createClass({
                 <div
                     className={cx({
                         'flipper': true,
-                        'flipped': this.props.flipped
+                        'flipped': this.state.flipped ? this.state.flipped : this.props.flipped
                     })}
                     onClick={this.onClick}>
                     <div className="front"></div>

@@ -10,14 +10,11 @@ function getTilesState() {
         allTiles: TileStore.getAll()
     };
 }
-
-
 var GameApp = React.createClass({
 
     getInitialState: function() {
         return getTilesState();
     },
-
 
     componentDidMount: function() {
         TileStore.addChangeListener(this._onChange);
@@ -26,7 +23,6 @@ var GameApp = React.createClass({
     componentWillUnmount: function() {
         TileStore.removeChangeListener(this._onChange);
     },
-
     render: function() {
         // This section should be hidden by default
         // and shown when there are tiles.
