@@ -51,44 +51,43 @@ function firstFlipped() {
  */
 function clickTile(targetId) {
 
-    var firstFlippedIndex = firstFlipped();
-
-    /**
-     * If the tile is already flipped, return false
-     */
-    if (_tiles[targetId].flipped === true) return false;
-
     /**
      * Flip the tile
      */
     _tiles[targetId].flipped = true;
 
+}
+
+function matchCheck() {
+
+    var flipped = [];
+
     /**
-     * Check if there is any matching tile
-     */
+    * Check if there is any matching tile
+    */
     for (var id in _tiles) {
 
-        if (_tiles[id].image === _tiles[targetId].image && _tiles[id].flipped === true && _tiles[id].id !== targetId) {
-
-            /**
-             * Flag both of them as matched
-             */
-            _tiles[id].matched = true;
-            _tiles[targetId].matched = true;
-
-            return true;
+        if (_tiles[id].flipped === true && _tiles[id].matched === false) {
+            flipped.push(id);
         }
+
     }
 
-    /**
-     * If it's not first flipped and the first one does not match second one
-     */
-    if (firstFlippedIndex !== null) {
-        _tiles[firstFlippedIndex].flipped = false;
-        _tiles[targetId].flipped = false;
+    if (flipped.length < 2) return;
+
+    if (_tiles[flipped[0]].image === _tiles[flipped[1]].image) {
+
+        _tiles[flipped[0]].matched = true;
+        _tiles[flipped[1]].matched = true;
+
+
+    } else {
+
+        _tiles[flipped[0]].flipped = false;
+        _tiles[flipped[1]].flipped = false;
+
     }
 
-    return true
 }
 
 var TileStore = assign({}, EventEmitter.prototype, {
@@ -130,6 +129,11 @@ AppDispatcher.register(function (action) {
             TileStore.emitChange();
             break;
 
+        case TileConstants.MATCH_CHECK:
+            matchCheck();
+            TileStore.emitChange();
+
+            break;
         default:
         // no op
     }

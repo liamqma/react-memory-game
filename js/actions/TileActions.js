@@ -11,6 +11,12 @@ var TileActions = {
             actionType: TileConstants.TILE_CLICK,
             id: id
         });
+    },
+
+    matchCheck: function() {
+        AppDispatcher.dispatch({
+            actionType: TileConstants.MATCH_CHECK
+        });
     }
 
 };
