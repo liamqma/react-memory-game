@@ -1,6 +1,6 @@
 var React = require('react');
 
-var GameApp = require('./components/GameApp.react.jsx')
+var GameApp = require('./components/GameApp.jsx')
 
 React.render(
     <GameApp />,

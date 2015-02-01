@@ -1,6 +1,4 @@
-var keyMirror = require('keymirror');
-
-module.exports = keyMirror({
-    TILE_CLICK: null,
-    MATCH_CHECK: null
-});
+module.exports = {
+    TILE_CLICK: 'TILE_CLICK',
+    MATCH_CHECK: 'MATCH_CHECK'
+};

@@ -2,69 +2,46 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var TileConstants = require('../constants/TileConstants');
 var assign = require('object-assign');
+var _ = require('lodash');
 
 var CHANGE_EVENT = 'change';
 
-var _tiles = [
-    {
-        id: 0,
-        image: 'https://c2.staticflickr.com/8/7301/16344760136_a91812142d.jpg',
-        flipped: false,
-        matched: false
-    },
-    {
-        id: 1,
-        image: 'https://c2.staticflickr.com/8/7293/16370327635_04c27353c0_n.jpg',
-        flipped: false,
-        matched: false
-    },
-    {
-        id: 2,
-        image: 'https://c2.staticflickr.com/8/7301/16344760136_a91812142d.jpg',
-        flipped: false,
-        matched: false
-    },
-    {
-        id: 3,
-        image: 'https://c2.staticflickr.com/8/7293/16370327635_04c27353c0_n.jpg',
-        flipped: false,
-        matched: false
+
+var _tiles = [];
+
+
+function generateTiles() {
+    var images = [];
+    for (var i = 1; i < 9; i++) {
+        images.push("images/" + i + ".jpg");
     }
-];
-
-
-/**
- * Check if there is one already flipped
- */
-function firstFlipped() {
-
-    for (var id in _tiles) {
-        if (_tiles[id].flipped === true && _tiles[id].matched === false) return id;
+    images = _.shuffle(images);
+    images = images.concat(images);
+    for (var i = 0; i < images.length; i++) {
+        _tiles.push({
+            image: images[i],
+            flipped: false,
+            matched: false
+        });
     }
-
-    return null;
-
 }
 
-/**
- * When a tile is clicked
- */
 function clickTile(targetId) {
-
     /**
      * Flip the tile
      */
     _tiles[targetId].flipped = true;
 
+
 }
 
 function matchCheck() {
-
     var flipped = [];
 
     /**
-    * Check if there is any matching tile
-    */
+     * Check if there is any matching tile
+     */
+
     for (var id in _tiles) {
 
         if (_tiles[id].flipped === true && _tiles[id].matched === false) {
@@ -76,20 +53,18 @@ function matchCheck() {
     if (flipped.length < 2) return;
 
     if (_tiles[flipped[0]].image === _tiles[flipped[1]].image) {
-
         _tiles[flipped[0]].matched = true;
+
         _tiles[flipped[1]].matched = true;
 
 
     } else {
-
         _tiles[flipped[0]].flipped = false;
+
         _tiles[flipped[1]].flipped = false;
 
     }
-
 }
-
 var TileStore = assign({}, EventEmitter.prototype, {
 
 
@@ -103,6 +78,19 @@ var TileStore = assign({}, EventEmitter.prototype, {
 
     emitChange: function () {
         this.emit(CHANGE_EVENT);
+    },
+
+    getFirstFlipIndex: function () {
+
+        var firstFlipIndex = null;
+
+        for (var id in _tiles) {
+            if (_tiles[id].flipped === true && _tiles[id].matched === false) {
+                firstFlipIndex = id;
+            }
+        }
+
+        return firstFlipIndex;
     },
 
     /**
@@ -121,7 +109,7 @@ var TileStore = assign({}, EventEmitter.prototype, {
 });
 
 // Register callback to handle all updates
-AppDispatcher.register(function (action) {
+TileStore.dispatchToken = AppDispatcher.register(function (action) {
 
     switch (action.actionType) {
         case TileConstants.TILE_CLICK:
@@ -138,5 +126,12 @@ AppDispatcher.register(function (action) {
         // no op
     }
 });
+
+generateTiles();
+
+
+/**
+ * When a tile is clicked
+ */
 
 module.exports = TileStore;
