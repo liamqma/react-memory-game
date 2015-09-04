@@ -8,7 +8,3 @@ Get started
     npm start
 
 ```
-
-React.js components structure:
-
-![Alt text](http://www.gliffy.com/go/publish/image/6617535/L.png)
