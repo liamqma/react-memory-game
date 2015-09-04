@@ -1,4 +1,4 @@
-DEMO: [http://react-memory.liamqma.me/](http://react-memory.liamqma.me)
+DEMO: [http://www.liamqma.me/react-memory-game/](http://www.liamqma.me/react-memory-game/)
 
 Get started
 
