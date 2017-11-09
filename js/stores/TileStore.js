@@ -12,11 +12,13 @@ var _tiles = [];
 
 function generateTiles() {
     var images = [];
+    var images2 = [];
     for (var i = 1; i < 9; i++) {
         images.push("images/" + i + ".jpg");
     }
     images = _.shuffle(images);
-    images = images.concat(images);
+	images2 = _.shuffle(images);
+    images = images.concat(images2);
     for (var i = 0; i < images.length; i++) {
         _tiles.push({
             image: images[i],
